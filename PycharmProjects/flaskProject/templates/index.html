@@ -1,0 +1,604 @@
+
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>Device Management</title>#}
+{#    <style>#}
+{#        body {#}
+{#            font-family: Arial, sans-serif;#}
+{#            background-color: #f8f9fa;#}
+{#            margin: 0;#}
+{#            padding: 20px;#}
+{#        }#}
+{#        h1 {#}
+{#            text-align: center;#}
+{#            margin-bottom: 20px;#}
+{#        }#}
+{#        table {#}
+{#            width: 100%;#}
+{#            border-collapse: collapse;#}
+{#            margin-bottom: 20px;#}
+{#        }#}
+{#        th, td {#}
+{#            padding: 10px;#}
+{#            text-align: left;#}
+{#            border: 1px solid #ddd;#}
+{#        }#}
+{#        th {#}
+{#            background-color: #f2f2f2;#}
+{#        }#}
+{#        tr:nth-child(even) {#}
+{#            background-color: #f9f9f9;#}
+{#        }#}
+{#        .form-container {#}
+{#            max-width: 400px;#}
+{#            margin: 0 auto 40px;#}
+{#            padding: 20px;#}
+{#            background-color: #fff;#}
+{#            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);#}
+{#            border-radius: 10px;#}
+{#        }#}
+{#        form {#}
+{#            display: flex;#}
+{#            flex-direction: column;#}
+{#        }#}
+{#        label {#}
+{#            margin-top: 10px;#}
+{#        }#}
+{#        input, select {#}
+{#            margin-top: 5px;#}
+{#            padding: 10px;#}
+{#            font-size: 16px;#}
+{#            border: 1px solid #ddd;#}
+{#            border-radius: 5px;#}
+{#        }#}
+{#        button {#}
+{#            margin-top: 20px;#}
+{#            padding: 10px;#}
+{#            font-size: 16px;#}
+{#            background-color: #007bff;#}
+{#            color: white;#}
+{#            border: none;#}
+{#            border-radius: 5px;#}
+{#            cursor: pointer;#}
+{#        }#}
+{#        button:hover {#}
+{#            background-color: #0056b3;#}
+{#        }#}
+{#        .section {#}
+{#            display: none;#}
+{#        }#}
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{#    <h1>Device Management</h1>#}
+{##}
+{#    <button id="devices-toggle">Toggle Device Information</button>#}
+{#    <button id="specifications-toggle">Toggle Specifications</button>#}
+{#    <button id="status-toggle">Toggle Status</button>#}
+{#    <button id="usage-history-toggle">Toggle Usage History</button>#}
+{#    <!-- Device Information -->#}
+{#    <h2>Device Information</h2>#}
+{#    <table id="devices-table">#}
+{#        <thead>#}
+{#            <tr>#}
+{#                <th>Device ID</th>#}
+{#                <th>Device Name</th>#}
+{#                <th>Type</th>#}
+{#                <th>Manufacturer</th>#}
+{#                <th>Model Number</th>#}
+{#                <th>Serial Number</th>#}
+{#                <th>Purchase Date</th>#}
+{#                <th>Warranty Expiry Date</th>#}
+{#            </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#        </tbody>#}
+{#      <!-- Device Information -->#}
+{#    <div id="devices-section" class="section">#}
+{#        <h2>Device Information</h2>#}
+{#        <table id="devices-table">#}
+{#            <thead>#}
+{#                <tr>#}
+{#                    <th>Device ID</th>#}
+{#                    <th>Device Name</th>#}
+{#                    <th>Type</th>#}
+{#                    <th>Manufacturer</th>#}
+{#                    <th>Model Number</th>#}
+{#                    <th>Serial Number</th>#}
+{#                    <th>Purchase Date</th>#}
+{#                    <th>Warranty Expiry Date</th>#}
+{#                </tr>#}
+{#            </thead>#}
+{#            <tbody></tbody>#}
+{#        </table>#}
+{#    </div>#}
+{##}
+{#    <!-- Specifications -->#}
+{#    <div id="specifications-section" class="section">#}
+{#        <h2>Specifications</h2>#}
+{#        <table id="specifications-table">#}
+{#            <thead>#}
+{#                <tr>#}
+{#                    <th>Specification ID</th>#}
+{#                    <th>Device ID</th>#}
+{#                    <th>Specification Name</th>#}
+{#                    <th>Specification Value</th>#}
+{#                </tr>#}
+{#            </thead>#}
+{#            <tbody></tbody>#}
+{#        </table>#}
+{#    </div>#}
+{##}
+{#    <!-- Status -->#}
+{#    <div id="status-section" class="section">#}
+{#        <h2>Status</h2>#}
+{#        <table id="status-table">#}
+{#            <thead>#}
+{#                <tr>#}
+{#                    <th>Status ID</th>#}
+{#                    <th>Device ID</th>#}
+{#                    <th>Status</th>#}
+{#                    <th>Status Date</th>#}
+{#                </tr>#}
+{#            </thead>#}
+{#            <tbody></tbody>#}
+{#        </table>#}
+{#    </div>#}
+{##}
+{#    <!-- Usage History -->#}
+{#    <div id="usage-history-section" class="section">#}
+{#        <h2>Usage History</h2>#}
+{#        <table id="usage-history-table">#}
+{#            <thead>#}
+{#                <tr>#}
+{#                    <th>Usage ID</th>#}
+{#                    <th>Device ID</th>#}
+{#                    <th>Usage Start Time</th>#}
+{#                    <th>Usage End Time</th>#}
+{#                    <th>Usage Description</th>#}
+{#                </tr>#}
+{#            </thead>#}
+{#            <tbody></tbody>#}
+{#        </table>#}
+{#    </div>#}
+{#    </table>#}
+{#<div class="form-container">#}
+{#  <h2>Add New Device</h2>#}
+{#<form id="add-device-form">#}
+{#    <label for="device_name">Device Name:</label>#}
+{#    <input type="text" id="device_name" name="device_name" required>#}
+{#    <label for="device_type">Device Type:</label>#}
+{#    <select name="device_type" id="device_type" required>#}
+{#        <option value="1">Laptop</option>#}
+{#        <option value="2">Smartphone</option>#}
+{#        <option value="3">Printer</option>#}
+{#    </select>#}
+{#    <label for="manufacturer">Manufacturer:</label>#}
+{#    <input type="text" id="manufacturer" name="manufacturer" required>#}
+{#    <label for="model_number">Model Number:</label>#}
+{#    <input type="text" id="model_number" name="model_number" required>#}
+{#    <label for="serial_number">Serial Number:</label>#}
+{#    <input type="text" id="serial_number" name="serial_number" required>#}
+{#    <label for="purchase_date">Purchase Date:</label>#}
+{#    <input type="date" id="purchase_date" name="purchase_date" required>#}
+{#    <label for="warranty_expiry_date">Warranty Expiry Date:</label>#}
+{#    <input type="date" id="warranty_expiry_date" name="warranty_expiry_date" required>#}
+{#    <button type="submit">Add Device</button>#}
+{#</form>#}
+{##}
+{#<h2>Update Device</h2>#}
+{#<form id="updateDeviceForm">#}
+{#    <label for="deviceId">Device ID:</label>#}
+{#    <input type="text" id="deviceId" name="device_id" required><br><br>#}
+{#    <label for="deviceType">Device Type:</label>#}
+{#    <input type="text" id="deviceType" name="device_type" required><br><br>#}
+{#    <label for="deviceName">Device Name:</label>#}
+{#    <input type="text" id="deviceName" name="device_name" required><br><br>#}
+{#    <label for="manufacturer">Manufacturer:</label>#}
+{#    <input type="text" id="manufacturer" name="manufacturer" required><br><br>#}
+{#    <label for="modelNumber">Model Number:</label>#}
+{#    <input type="text" id="modelNumber" name="model_number" required><br><br>#}
+{#    <label for="serialNumber">Serial Number:</label>#}
+{#    <input type="text" id="serialNumber" name="serial_number" required><br><br>#}
+{#    <label for="purchaseDate">Purchase Date:</label>#}
+{#    <input type="date" id="purchaseDate" name="purchase_date" required><br><br>#}
+{#    <label for="warrantyExpiryDate">Warranty Expiry Date:</label>#}
+{#    <input type="date" id="warrantyExpiryDate" name="warranty_expiry_date" required><br><br>#}
+{#    <button type="submit">Update Device</button>#}
+{#</form>#}
+{#</div>#}
+{##}
+{#   <script>#}
+{#    document.addEventListener('DOMContentLoaded', function() {#}
+{#        const fetchAndPopulateDevices = () => {#}
+{#            fetch('/devices')#}
+{#                .then(response => response.json())#}
+{#                .then(data => {#}
+{#                    const tableBody = document.querySelector('#devices-table tbody');#}
+{#                    tableBody.innerHTML = '';#}
+{#                    data.forEach(device => {#}
+{#                        const row = document.createElement('tr');#}
+{#                        row.innerHTML = `#}
+{#                            <td>${device[0]}</td>#}
+{#                            <td>${device[1]}</td>#}
+{#                            <td>${device[2]}</td>#}
+{#                            <td>${device[3]}</td>#}
+{#                            <td>${device[4]}</td>#}
+{#                            <td>${device[5]}</td>#}
+{#                            <td>${device[6]}</td>#}
+{#                            <td>${device[7]}</td>#}
+{#                        `;#}
+{#                        tableBody.appendChild(row);#}
+{#                    });#}
+{#                })#}
+{#                .catch(error => console.error('Error fetching device information:', error));#}
+{#        };#}
+{##}
+{#        fetchAndPopulateDevices();#}
+{##}
+{#        document.getElementById('add-device-form').addEventListener('submit', function(event) {#}
+{#            event.preventDefault();#}
+{#            const formData = new FormData(this);#}
+{#            const formObject = {};#}
+{#            formData.forEach((value, key) => formObject[key] = value);#}
+{#            fetch('/add_device', {#}
+{#                method: 'POST',#}
+{#                headers: {#}
+{#                    'Content-Type': 'application/json'#}
+{#                },#}
+{#                body: JSON.stringify(formObject)#}
+{#            })#}
+{#            .then(response => response.json())#}
+{#            .then(result => {#}
+{#                if (result.success) {#}
+{#                    alert('Device added successfully!');#}
+{#                    fetchAndPopulateDevices();#}
+{#                } else {#}
+{#                    alert('Error adding device');#}
+{#                }#}
+{#            })#}
+{#            .catch(error => console.error('Error adding device:', error));#}
+{#        });#}
+{##}
+{#        document.getElementById('updateDeviceForm').addEventListener('submit', function(event) {#}
+{#            event.preventDefault();#}
+{#            var formData = {#}
+{#                device_id: document.getElementById('deviceId').value,#}
+{#                device_type: document.getElementById('deviceType').value,#}
+{#                device_name: document.getElementById('deviceName').value,#}
+{#                manufacturer: document.getElementById('manufacturer').value,#}
+{#                model_number: document.getElementById('modelNumber').value,#}
+{#                serial_number: document.getElementById('serialNumber').value,#}
+{#                purchase_date: document.getElementById('purchaseDate').value,#}
+{#                warranty_expiry_date: document.getElementById('warrantyExpiryDate').value#}
+{#            };#}
+{#            fetch('/update_device', {#}
+{#                method: 'POST',#}
+{#                headers: {#}
+{#                    'Content-Type': 'application/json'#}
+{#                },#}
+{#                body: JSON.stringify(formData)#}
+{#            })#}
+{#            .then(response => response.json())#}
+{#            .then(data => {#}
+{#                if (data.success) {#}
+{#                    alert('Device updated successfully!');#}
+{#                    // You can redirect or do any other action upon successful update#}
+{#                } else {#}
+{#                    alert('Failed to update device: ' + data.error);#}
+{#                }#}
+{#            })#}
+{#            .catch(error => {#}
+{#                console.error('Error:', error);#}
+{#            });#}
+{#        });#}
+{#    });#}
+{#</script>#}
+{##}
+{#</body>#}
+{#</html>#}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto 40px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+        }
+        input, select {
+            margin-top: 5px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .section {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Device Management</h1>
+
+    <button id="devices-toggle"> Device Information</button>
+    <button id="specifications-toggle"> Device Specifications</button>
+    <button id="status-toggle"> Device Status</button>
+    <button id="usage-history-toggle">Device Usage History</button>
+
+    <!-- Device Information -->
+    <div id="devices-section" class="section">
+        <h2>Device Information</h2>
+        <table id="devices-table">
+            <thead>
+                <tr>
+                    <th>Device ID</th>
+                    <th>Device Name</th>
+                    <th>Type</th>
+                    <th>Manufacturer</th>
+                    <th>Model Number</th>
+                    <th>Serial Number</th>
+                    <th>Purchase Date</th>
+                    <th>Warranty Expiry Date</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- Specifications -->
+    <div id="specifications-section" class="section">
+        <h2>Specifications</h2>
+        <table id="specifications-table">
+            <thead>
+                <tr>
+                    <th>Specification ID</th>
+                    <th>Device ID</th>
+                    <th>Specification Name</th>
+                    <th>Specification Value</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- Status -->
+    <div id="status-section" class="section">
+        <h2>Status</h2>
+        <table id="status-table">
+            <thead>
+                <tr>
+                    <th>Status ID</th>
+                    <th>Device ID</th>
+                    <th>Status</th>
+                    <th>Status Date</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- Usage History -->
+    <div id="usage-history-section" class="section">
+        <h2>Usage History</h2>
+        <table id="usage-history-table">
+            <thead>
+                <tr>
+                    <th>Usage ID</th>
+                    <th>Device ID</th>
+                    <th>Usage Start Time</th>
+                    <th>Usage End Time</th>
+                    <th>Usage Description</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div class="form-container">
+        <h2>Add New Device</h2>
+        <form id="add-device-form">
+            <label for="device_name">Device Name:</label>
+            <input type="text" id="device_name" name="device_name" required>
+
+            <label for="device_type">Device Type:</label>
+            <select name="device_type" id="device_type" required>
+                <option value="1">Laptop</option>
+                <option value="2">Smartphone</option>
+                <option value="3">Printer</option>
+            </select>
+
+            <label for="manufacturer">Manufacturer:</label>
+            <input type="text" id="manufacturer" name="manufacturer" required>
+
+            <label for="model_number">Model Number:</label>
+            <input type="text" id="model_number" name="model_number" required>
+
+            <label for="serial_number">Serial Number:</label>
+            <input type="text" id="serial_number" name="serial_number" required>
+
+            <label for="purchase_date">Purchase Date:</label>
+            <input type="date" id="purchase_date" name="purchase_date" required>
+
+            <label for="warranty_expiry_date">Warranty Expiry Date:</label>
+            <input type="date" id="warranty_expiry_date" name="warranty_expiry_date" required>
+
+            <button type="submit">Add Device</button>
+        </form>
+
+    </div>
+
+    </table>
+</div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fetchAndPopulateTable = (url, tableId) => {
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        const tableBody = document.querySelector(`#${tableId} tbody`);
+                        tableBody.innerHTML = '';
+                        data.forEach(item => {
+                            const row = document.createElement('tr');
+                            Object.values(item).forEach(value => {
+                                const cell = document.createElement('td');
+                                cell.textContent = value;
+                                row.appendChild(cell);
+                            });
+                            tableBody.appendChild(row);
+                        });
+                    })
+                    .catch(error => console.error(`Error fetching data from ${url}:`, error));
+            };
+            document.addEventListener("DOMContentLoaded", function() {
+    // Get references to the buttons and the section
+    var deviceTypesToggle = document.getElementById("device-types-toggle");
+    var deviceTypesSection = document.getElementById("device-types-section");
+
+    // Add event listener to the button
+    deviceTypesToggle.addEventListener("click", function() {
+        // Toggle the display property of the section
+        if (deviceTypesSection.style.display === "none") {
+            deviceTypesSection.style.display = "block";
+        } else {
+            deviceTypesSection.style.display = "none";
+        }
+    });
+});
+
+            document.getElementById('devices-toggle').addEventListener('click', function() {
+                const section = document.getElementById('devices-section');
+                section.style.display = section.style.display === 'none' ? 'block' : 'none';
+                if (section.style.display === 'block') fetchAndPopulateTable('/devices', 'devices-table');
+            });
+
+            document.getElementById('specifications-toggle').addEventListener('click', function() {
+                const section = document.getElementById('specifications-section');
+                section.style.display = section.style.display === 'none' ? 'block' : 'none';
+                if (section.style.display === 'block') fetchAndPopulateTable('/specifications', 'specifications-table');
+            });
+
+            document.getElementById('status-toggle').addEventListener('click', function() {
+                const section = document.getElementById('status-section');
+                section.style.display = section.style.display === 'none' ? 'block' : 'none';
+                if (section.style.display === 'block') fetchAndPopulateTable('/status', 'status-table');
+            });
+
+            document.getElementById('usage-history-toggle').addEventListener('click', function() {
+                const section = document.getElementById('usage-history-section');
+                section.style.display = section.style.display === 'none' ? 'block' : 'none';
+                if (section.style.display === 'block') fetchAndPopulateTable('/usage_history', 'usage-history-table');
+            });
+
+            document.getElementById('add-device-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const formData = new FormData(this);
+                const formObject = {};
+                formData.forEach((value, key) => formObject[key] = value);
+                fetch('/add_device', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formObject)
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        alert('Device added successfully!');
+                        fetchAndPopulateTable('/devices', 'devices-table');
+                    } else {
+                        alert('Error adding device');
+                    }
+                })
+                .catch(error => console.error('Error adding device:', error));
+            });
+
+            document.getElementById('updateDeviceForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const formData = new FormData(this);
+                const formObject = {};
+                formData.forEach((value, key) => formObject[key] = value);
+                fetch('/update_device', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formObject)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Device updated successfully!');
+                        fetchAndPopulateTable('/devices', 'devices-table');
+                    } else {
+                        alert('Failed to update device: ' + data.error);
+                    }
+                })
+                .catch(error => console.error('Error updating device:', error));
+            });
+
+            // Initial load of device data
+            fetchAndPopulateTable('/devices', 'devices-table');
+        });
+    </script>
+</body>
+</html>
