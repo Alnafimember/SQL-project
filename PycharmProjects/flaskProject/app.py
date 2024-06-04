@@ -4,9 +4,9 @@ import pypyodbc as odbc
 
 app = Flask(__name__)
 
-DRIVER_NAME = 'SQL SERVER'
-SERVER_NAME = 'Muhammad-Rafay\\SQLEXPRESS'
-DATABASE_NAME = 'DeviceManager'
+DRIVER_NAME = 'server name'
+SERVER_NAME = 'user-name'
+DATABASE_NAME = 'database name'
 
 connection_string = f"""
 DRIVER={{{DRIVER_NAME}}};
